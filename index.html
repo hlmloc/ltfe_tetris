@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris 8 Level - Bài Giữa Kỳ</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #f4f6f9;
+            font-family: Arial, sans-serif;
+            user-select: none;
+        }
+
+        .main_box {
+            background: #ffffff;
+            border: 1px solid #dcdcdc;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+            font-size: 1.05rem;
+        }
+
+        #game_board {
+            border-collapse: separate;
+            border-spacing: 1px;
+            background-color: #333;
+            border: 3px solid #222;
+            margin: 0 auto;
+        }
+
+        #game_board td {
+            width: 32px;
+            height: 32px;
+            background-color: #ffffff;
+        }
+
+        .cell_empty { background-color: #ffffff !important; }
+        .cell_I { background-color: #00bcd4 !important; }
+        .cell_J { background-color: #2196f3 !important; }
+        .cell_L { background-color: #ff9800 !important; }
+        .cell_O { background-color: #ffeb3b !important; }
+        .cell_S { background-color: #4caf50 !important; }
+        .cell_T { background-color: #9c27b0 !important; }
+        .cell_Z { background-color: #f44336 !important; }
+
+        .cell_obstacle { background-color: #7f8c8d !important; }
+        .cell_lava { background-color: #e67e22 !important; }
+        .cell_bomb { background-color: #e91e63 !important; }
+
+        #next_board {
+            border-collapse: separate;
+            border-spacing: 1px;
+            background-color: #ccc;
+            margin: 0 auto;
+        }
+
+        #next_board td {
+            width: 26px;
+            height: 26px;
+            background-color: #ffffff;
+        }
+
+        .btn_ctrl {
+            width: 60px;
+            height: 60px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin: 3px;
+        }
+    </style>
+</head>
+<body class="py-4">
+
+<div class="container">
+    <div class="row g-4 justify-content-center align-items-start">
+        <div class="col-auto">
+            <div class="main_box text-center" id="board_container">
+                <table id="game_board"></table>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-lg-4">
+            <div class="main_box mb-3">
+                <h4 class="border-bottom pb-2 text-primary fw-bold">BẢNG THÔNG TIN</h4>
+
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="fw-bold">Chọn màn chơi:</span>
+                    <select id="level_select" class="form-select w-auto fw-bold text-primary">
+                        <option value="1">Level 1</option>
+                        <option value="2">Level 2</option>
+                        <option value="3">Level 3</option>
+                        <option value="4">Level 4</option>
+                        <option value="5">Level 5</option>
+                        <option value="6">Level 6</option>
+                        <option value="7">Level 7</option>
+                        <option value="8">Level 8 (BOSS)</option>
+                    </select>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span>Điểm số:</span>
+                    <span id="score" class="fs-3 fw-bold text-danger">0</span>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span>Hàng đã xóa:</span>
+                    <span id="lines" class="fs-4 text-success fw-bold">0 / 5</span>
+                </div>
+
+                <div class="alert alert-secondary p-3 mb-3">
+                    <strong class="d-block fs-5" id="level_title">Level 1: Cơ Bản</strong>
+                </div>
+
+                <div class="text-center mb-3">
+                    <span class="d-block small text-muted mb-2 fw-bold fs-6">Khối Tiếp Theo:</span>
+                    <table id="next_board"></table>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button id="btn_start" class="btn btn-success btn-lg fw-bold">BẮT ĐẦU / CHƠI LẠI</button>
+                    <button id="btn_pause" class="btn btn-warning btn-lg fw-bold" disabled>TẠM DỪNG</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="game_modal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_title">Thông báo</h5>
+            </div>
+            <div class="modal-body text-center" id="modal_body">
+                ...
+            </div>
+            <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary fw-bold" data-bs-dismiss="modal" id="modal_btn_restart">Thử Lại</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/bootstrap.bundle.min.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
